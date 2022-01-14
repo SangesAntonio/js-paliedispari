@@ -12,16 +12,14 @@ const button=document.getElementById('bottone');
 const numb=document.getElementById('numero-scelto')
 const evenOdd=document.getElementById('selector')
 const cpuNumb=document.getElementById('cpu-numb')
+const result=document.getElementById('result')
 const winner=document.getElementById('winner')
 
 
-//creo funzione pari o dispari
+//funzione pari o dispari
 function evenNumb(number){
-    let value=false
-    if(number % 2 == 0){
-        value=true
-    }
-    return value
+    return (number % 2 );
+    
 }
 //funzione numeri random
 function randomNumb(min, max){
@@ -29,17 +27,35 @@ function randomNumb(min, max){
     return rndNumb;
 }
 
+//identifico pari o dispari 
+let choose ;
+if(evenOdd.value === 1){
+    choose = 1;
+}else{
+    choose = 0
+}
+
 //bottone per eseguire 
 button.addEventListener('click', function (){
     //creo numero random
+    let rndNumber=randomNumb(1,40);
+    cpuNumb.innerText = `Il computer ha scelto ${rndNumber}`;
 
-    let rndNumber=randomNumb(1,5);
-    cpuNumb.innerText = `Il computer ha scelto ${rndNumber}`
     //calcolo  risultato
     let finalnumb=parseInt(numb.value);
     let sum= rndNumber+finalnumb;
+    result.innerText = `Il risultato è ${sum}`;
+    console.log(evenNumb(sum))
 
-    winner.innerText = `Il risultato è ${sum}`
+    //scelgo pari o dispari
+    if(choose == evenNumb(sum)){
+        winner.innerText='hai vinto'
+    }else {
+        winner.innerText='hai perso'
+        
+    }
+    //dichiaro il vicnitore
+
     
 })
 
